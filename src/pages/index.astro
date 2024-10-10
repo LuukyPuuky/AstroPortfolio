@@ -1,16 +1,58 @@
 ---
+import ThreeDScene from '../components/ThreeDScene';
+import Card from '../components/Card.astro';
+import Navbar from '../components/NavBar.astro'; 
+import '../styles/global.css'; 
 
+const pageTitle = 'Home';
+const navbarLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/contact', label: 'Contact' },
+];
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <Navbar links={navbarLinks} />
+    <main class="grid-container">
+      <div class="grid-item">
+        <Card
+          title="Card Title 1"
+          description="This is the description of the first card."
+          imageUrl="/images/image1.jpg"
+          imageAlt="Image 1 description"
+        />
+      </div>
+      <div class="grid-item">
+        <Card
+          title="Card Title 2"
+          description="This is the description of the second card."
+          imageUrl="/images/image2.jpg"
+          imageAlt="Image 2 description"
+        />
+      </div>
+      <div class="grid-item">
+        <Card
+          title="Card Title 3"
+          description="This is the description of the third card."
+          imageUrl="/images/image3.jpg"
+          imageAlt="Image 3 description"
+        />
+      </div>
+      <div class="grid-item">
+        <Card
+          title="Card Title 4"
+          description="This is the description of the fourth card."
+          imageUrl="/images/image4.jpg"
+          imageAlt="Image 4 description"
+        />
+      </div>
+    </main>
+    <ThreeDScene client:load />
+  </body>
 </html>
