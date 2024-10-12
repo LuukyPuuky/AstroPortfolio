@@ -1,14 +1,14 @@
 ---
-import ThreeDScene from '../components/ThreeDScene';
 import Card from '../components/Card.astro';
 import Navbar from '../components/NavBar.astro'; 
+import Header from '../components/Header.astro';
 import '../styles/global.css'; 
 
 const pageTitle = 'Home';
 const navbarLinks = [
   { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/projects', label: 'Projects' },
+  { href: '/Projects', label: 'Projects' },
+  { href: '/Learningoutcome', label: 'Learning Outcome' },
   { href: '/contact', label: 'Contact' },
 ];
 ---
@@ -19,12 +19,13 @@ const navbarLinks = [
   </head>
   <body>
     <Navbar links={navbarLinks} />
+    <Header title="Welcome to my portfolio!" />
     <main class="grid-container">
       <div class="grid-item">
         <Card
           title="Card Title 1"
-          description="This is the description of the first card."
-          imageUrl="/images/image1.jpg"
+          description="Project 1"
+          imageUrl="../images/image1.jpg"
           imageAlt="Image 1 description"
         />
       </div>
@@ -53,6 +54,6 @@ const navbarLinks = [
         />
       </div>
     </main>
-    <ThreeDScene client:load />
+    
   </body>
 </html>

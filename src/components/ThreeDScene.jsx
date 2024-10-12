@@ -1,5 +1,3 @@
-// src/components/ThreeDScene.jsx
-
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
@@ -18,7 +16,7 @@ const ThreeDScene = () => {
       // Set up camera
       camera = new THREE.PerspectiveCamera(
         45,
-        window.innerWidth / window.innerHeight,
+        container.clientWidth / container.clientHeight, // Use container dimensions
         1,
         1000
       );
@@ -26,13 +24,13 @@ const ThreeDScene = () => {
 
       // Renderer
       renderer = new THREE.WebGLRenderer({ alpha: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize(container.clientWidth, container.clientHeight); // Set renderer size to container
       container.appendChild(renderer.domElement);
 
       // Orbit Controls
       const controls = new OrbitControls(camera, renderer.domElement);
-      controls.enableZoom = false; // Disable zooming
-      controls.enableDamping = true; // Enable damping for smoother controls
+      controls.enableZoom = false;
+      controls.enableDamping = true;
       controls.dampingFactor = 0.25;
 
       // Light setup
@@ -55,7 +53,6 @@ const ThreeDScene = () => {
       const radius = 10;
       const segments = 32;
 
-      // Upper half (red)
       const upperSphereGeometry = new THREE.SphereGeometry(
         radius,
         segments,
@@ -69,7 +66,6 @@ const ThreeDScene = () => {
       const upperSphere = new THREE.Mesh(upperSphereGeometry, upperMaterial);
       scene.add(upperSphere);
 
-      // Lower half (white)
       const lowerSphereGeometry = new THREE.SphereGeometry(
         radius,
         segments,
@@ -83,7 +79,6 @@ const ThreeDScene = () => {
       const lowerSphere = new THREE.Mesh(lowerSphereGeometry, lowerMaterial);
       scene.add(lowerSphere);
 
-      // Black band in the middle
       const bandGeometry = new THREE.CylinderGeometry(
         radius * 1.01,
         radius * 1.01,
@@ -92,24 +87,26 @@ const ThreeDScene = () => {
       );
       const bandMaterial = new THREE.MeshStandardMaterial({ color: 0x000000 });
       const band = new THREE.Mesh(bandGeometry, bandMaterial);
-      band.rotation.y = Math.PI / 2; // Rotate to be horizontal
+      band.rotation.y = Math.PI / 2;
       scene.add(band);
 
-      // Button in the center
       const buttonGeometry = new THREE.SphereGeometry(2, segments, segments);
       const buttonMaterial = new THREE.MeshStandardMaterial({
         color: 0xffffff,
       });
       const button = new THREE.Mesh(buttonGeometry, buttonMaterial);
-      button.position.z = radius + 0.1; // Push the button outward
+      button.position.z = radius + 0.1;
       scene.add(button);
     }
 
     // Handle window resizing
     function onWindowResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      if (container) {
+        // Use container dimensions instead of window dimensions
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+      }
     }
 
     // Animation loop
@@ -127,14 +124,16 @@ const ThreeDScene = () => {
     // Clean up on unmount
     return () => {
       window.removeEventListener("resize", onWindowResize);
-      container.removeChild(renderer.domElement);
+      if (container && renderer) {
+        container.removeChild(renderer.domElement);
+      }
     };
   }, []);
 
   return (
     <div
       ref={containerRef}
-      style={{ width: "100vw", height: "100vh", overflow: "hidden" }}
+      style={{ width: "100vw", height: "50vh", overflow: "hidden" }} // Responsive size set here
     />
   );
 };
