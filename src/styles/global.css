@@ -1,0 +1,29 @@
+:root {
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1e1e1e;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+  padding: 16px;
+}
+
+.grid-item {
+  grid-column: span 3;
+}
+
+@media (max-width: 768px) {
+  .grid-item {
+    grid-column: span 12;
+  }
+}

@@ -1,0 +1,32 @@
+---
+import ThreeDScene from '../components/ThreeDScene'; 
+
+const { title } = Astro.props;
+---
+
+<header class="header">
+    <div class="header-text">
+      <h1>{title}</h1>
+    </div>
+      <ThreeDScene client:load />
+  </header>
+  
+  <style>
+    .header {
+      display: flex;
+      justify-content: space-between; 
+      align-items: center; 
+      padding: 16px;  
+    }
+  
+    .header-text {
+      flex: 1; 
+      color: white;
+    }
+  
+    .header-pokeball {
+      width: 100px; 
+      height: 100px; 
+      overflow: hidden;
+    }
+  </style>

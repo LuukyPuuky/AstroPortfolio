@@ -10,6 +10,16 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.15.9"
+    "@astrojs/react": "^3.6.2",
+    "@splinetool/runtime": "^1.9.35",
+    "@types/react": "^18.3.10",
+    "@types/react-dom": "^18.3.0",
+    "astro": "^4.15.9",
+    "gsap": "^3.12.5",
+    "latest": "^0.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.169.0",
+    "three-orbitcontrols": "^2.110.3"
   }
 }
